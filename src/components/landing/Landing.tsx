@@ -20,7 +20,7 @@ function AppIcon({
 }: {
   slug: string;
   label: string;
-  badge?: number;
+  badge?: number | undefined;
   className?: string;
 }) {
   return (
