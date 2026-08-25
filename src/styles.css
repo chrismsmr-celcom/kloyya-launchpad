@@ -49,7 +49,7 @@
   --cream: oklch(0.973 0.008 85);
   --cream-soft: oklch(0.945 0.012 82);
 
-  --ink: #000831cc;
+  --ink: lch(6 22.14 282.77);
   --ink-soft: oklch(0.28 0.018 45);
 
   --brand: oklch(53% .166 259);
