@@ -47,7 +47,7 @@
   --radius: 0.75rem;
 
   --cream: oklch(0.973 0.008 85);
-  --cream-soft: oklch(0.945 0.012 82);
+  --cream-soft: #ffffff;
 
   --ink: lch(6 22.14 282.77);
   --ink-soft: oklch(0.28 0.018 45);
@@ -79,7 +79,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
 
-  --border: oklch(89% .011 75);
+  --border: #0000003d;
   --input: oklch(0.89 0.011 75);
   --ring: var(--brand);
 
