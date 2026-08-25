@@ -6,9 +6,26 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import logo from "@/assets/kloyya-logo.png.asset.json";
 
 const LOGIN_URL = "https://app.kloyya.com/login";
+
+/* -------------------------------- integrations ----------------------------- */
+
+const LOGOS: Record<string, string> = {
+  slack: "/integrations/slack.svg",
+  odoo: "/integrations/Odoo.svg",
+  outlook: "/integrations/outlook.svg",
+  salesforce: "/integrations/salesforce.svg",
+  linkedin: "/integrations/linkedin.svg",
+  github: "/integrations/github.svg",
+  gmail: "/integrations/gmail.svg",
+  googledrive: "/integrations/Google_Drive.svg",
+  instagram: "/integrations/Instagram.svg",
+  facebook: "/integrations/Facebook.svg",
+  excel: "/integrations/excel.svg",
+  whatsapp: "/integrations/WhatsApp.svg",
+  notion: "/integrations/Notion.svg",
+};
 
 /* ---------------------------------- bits --------------------------------- */
 
@@ -27,12 +44,13 @@ function AppIcon({
     <div className={`relative ${className}`}>
       <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-white shadow-[0_10px_30px_-12px_rgba(0,0,0,0.6)] ring-1 ring-black/5">
         <img
-          src={`https://cdn.simpleicons.org/${slug}`}
+          src={LOGOS[slug]}
           alt={label}
           loading="lazy"
-          className="h-7 w-7"
+          className="h-7 w-7 object-contain"
         />
       </div>
+
       {badge ? (
         <span className="absolute -right-1.5 -top-1.5 flex h-5 min-w-5 items-center justify-center rounded-full bg-destructive px-1 text-[11px] font-semibold text-destructive-foreground">
           {badge}
@@ -66,13 +84,21 @@ function NotifCard({
     >
       <div className="flex items-start gap-3">
         <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-white">
-          <img src={`https://cdn.simpleicons.org/${slug}`} alt="" className="h-5 w-5" />
+          <img
+            src={LOGOS[slug]}
+            alt={app}
+            className="h-5 w-5 object-contain"
+          />
         </div>
+
         <div className="min-w-0 flex-1">
           <div className="flex items-center justify-between gap-2">
-            <span className="text-[11px] uppercase tracking-[0.12em] text-cream/60">{app}</span>
+            <span className="text-[11px] uppercase tracking-[0.12em] text-cream/60">
+              {app}
+            </span>
             <span className="text-[11px] text-cream/40">now</span>
           </div>
+
           <p className="truncate text-sm font-medium text-cream">{title}</p>
           <p className="truncate text-xs text-cream/60">{body}</p>
         </div>
@@ -114,13 +140,19 @@ const NAV = [
 
 function Nav() {
   const [open, setOpen] = useState(false);
+
   return (
     <header className="fixed inset-x-0 top-4 z-50 px-4">
       <nav className="mx-auto flex max-w-5xl items-center justify-between rounded-full border border-white/10 bg-ink/80 px-4 py-2.5 text-cream backdrop-blur-xl">
         <a href="#top" className="flex items-center gap-2">
-          <img src={logo.url} alt="Kloyya" className="h-6 w-6" />
+          <img
+            src="/kloyya-logo.png"
+            alt="Kloyya"
+            className="h-6 w-6 object-contain"
+          />
           <span className="display text-lg tracking-tight">kloyya</span>
         </a>
+
         <div className="hidden items-center gap-7 md:flex">
           {NAV.map((n) => (
             <a
@@ -132,6 +164,7 @@ function Nav() {
             </a>
           ))}
         </div>
+
         <div className="flex items-center gap-2">
           <a
             href={LOGIN_URL}
@@ -139,12 +172,14 @@ function Nav() {
           >
             Login
           </a>
+
           <a
             href={LOGIN_URL}
             className="rounded-full bg-cream px-4 py-2 text-sm font-medium text-ink transition-transform hover:scale-[1.03]"
           >
             Enter Kloyya
           </a>
+
           <button
             aria-label="Menu"
             onClick={() => setOpen((v) => !v)}
@@ -154,6 +189,7 @@ function Nav() {
           </button>
         </div>
       </nav>
+
       {open ? (
         <div className="mx-auto mt-2 max-w-5xl rounded-3xl border border-white/10 bg-ink/95 p-4 text-cream backdrop-blur-xl md:hidden">
           {NAV.map((n) => (
@@ -166,7 +202,11 @@ function Nav() {
               {n.label}
             </a>
           ))}
-          <a href={LOGIN_URL} className="block py-2 text-sm text-cream/80">
+
+          <a
+            href={LOGIN_URL}
+            className="block py-2 text-sm text-cream/80"
+          >
             Login
           </a>
         </div>
@@ -182,15 +222,19 @@ const DOCK = [
   { slug: "slack", label: "Slack", badge: 4 },
   { slug: "whatsapp", label: "WhatsApp", badge: 6 },
   { slug: "notion", label: "Notion", badge: 10 },
-  { slug: "linear", label: "Linear" },
-  { slug: "jira", label: "Jira", badge: 3 },
-  { slug: "hubspot", label: "HubSpot" },
+  { slug: "salesforce", label: "Salesforce" },
+  { slug: "linkedin", label: "LinkedIn" },
+  { slug: "googledrive", label: "Google Drive" },
 ];
 
 function Hero() {
   return (
-    <section id="top" className="surface-dark relative overflow-hidden pt-32 pb-24">
+    <section
+      id="top"
+      className="surface-dark relative overflow-hidden pt-32 pb-24"
+    >
       <div className="hex-grid absolute inset-0 opacity-70" />
+
       <div className="relative mx-auto grid max-w-6xl items-center gap-14 px-6 lg:grid-cols-[1.05fr_1fr]">
         <div>
           <Reveal>
@@ -201,6 +245,7 @@ function Hero() {
               AI Chief of Staff
             </div>
           </Reveal>
+
           <Reveal delay={0.06}>
             <h1 className="display mt-7 text-[3.2rem] leading-[1.02] text-cream sm:text-6xl lg:text-7xl">
               One brain,
@@ -208,12 +253,15 @@ function Hero() {
               every <span className="italic text-brand-soft">decision</span>.
             </h1>
           </Reveal>
+
           <Reveal delay={0.12}>
             <p className="mt-6 max-w-lg text-base leading-relaxed text-cream/70">
-              Kloyya reads across your inbox, chats, tasks, and CRM, connects the threads, and hands
-              you the decision — not another notification.
+              Kloyya reads across your inbox, chats, tasks, and CRM, connects
+              the threads, and hands you the decision — not another
+              notification.
             </p>
           </Reveal>
+
           <Reveal delay={0.18}>
             <div className="mt-9 flex flex-wrap items-center gap-3">
               <a
@@ -222,13 +270,17 @@ function Hero() {
               >
                 Enter Kloyya
               </a>
+
               <a
                 href="#how"
                 className="rounded-full border border-white/20 px-6 py-3 text-sm font-medium text-cream transition-colors hover:bg-white/10"
               >
                 See how it works
               </a>
-              <span className="text-xs text-cream/45">Secure Waitlist Priority</span>
+
+              <span className="text-xs text-cream/45">
+                Secure Waitlist Priority
+              </span>
             </div>
           </Reveal>
         </div>
@@ -242,22 +294,36 @@ function Hero() {
             className="absolute left-0 top-2 float-slow"
             delay={0.2}
           />
+
           <motion.div
             initial={{ opacity: 0, scale: 0.94 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            transition={{
+              duration: 0.8,
+              delay: 0.35,
+              ease: [0.22, 1, 0.36, 1],
+            }}
             className="absolute left-1/2 top-1/2 flex -translate-x-1/2 -translate-y-1/2 gap-3 rounded-[28px] border border-white/10 bg-white/8 p-4 backdrop-blur-xl"
           >
             {DOCK.map((d, i) => (
               <motion.div
                 key={d.slug}
                 animate={{ y: [0, -6, 0] }}
-                transition={{ duration: 4 + i * 0.3, repeat: Infinity, ease: "easeInOut" }}
+                transition={{
+                  duration: 4 + i * 0.3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
               >
-                <AppIcon slug={d.slug} label={d.label} badge={d.badge} />
+                <AppIcon
+                  slug={d.slug}
+                  label={d.label}
+                  badge={d.badge}
+                />
               </motion.div>
             ))}
           </motion.div>
+
           <NotifCard
             app="Gmail"
             slug="gmail"
@@ -268,6 +334,7 @@ function Hero() {
           />
         </div>
       </div>
+
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-b from-transparent to-background" />
     </section>
   );
@@ -276,16 +343,19 @@ function Hero() {
 /* -------------------------------- marquee -------------------------------- */
 
 const TOOLS = [
-  "gmail",
-  "slack",
-  "whatsapp",
-  "linkedin",
-  "notion",
-  "jira",
-  "linear",
-  "salesforce",
-  "hubspot",
-  "googledrive",
+  { slug: "gmail", label: "Gmail" },
+  { slug: "slack", label: "Slack" },
+  { slug: "whatsapp", label: "WhatsApp" },
+  { slug: "linkedin", label: "LinkedIn" },
+  { slug: "notion", label: "Notion" },
+  { slug: "salesforce", label: "Salesforce" },
+  { slug: "googledrive", label: "Google Drive" },
+  { slug: "outlook", label: "Outlook" },
+  { slug: "github", label: "GitHub" },
+  { slug: "odoo", label: "Odoo" },
+  { slug: "excel", label: "Excel" },
+  { slug: "instagram", label: "Instagram" },
+  { slug: "facebook", label: "Facebook" },
 ];
 
 function Integrations() {
@@ -296,26 +366,36 @@ function Integrations() {
           <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
             Unlimited capability
           </p>
+
           <h2 className="display mt-4 max-w-3xl text-4xl sm:text-5xl">
             Anything scattered across your tools, Kloyya brings to one place.
           </h2>
+
           <p className="mt-5 max-w-xl text-muted-foreground">
-            Unlike agents that need integrations built one by one, Kloyya reads your accounts
-            directly — the way you already do.
+            Unlike agents that need integrations built one by one, Kloyya
+            reads your accounts directly — the way you already do.
           </p>
         </Reveal>
       </div>
+
       <div className="relative mt-12 overflow-hidden">
         <div className="marquee-track gap-4">
-          {[...TOOLS, ...TOOLS].map((slug, i) => (
+          {[...TOOLS, ...TOOLS].map((tool, i) => (
             <div
-              key={`${slug}-${i}`}
+              key={`${tool.slug}-${i}`}
               className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-card shadow-[var(--shadow-soft)]"
+              title={tool.label}
             >
-              <img src={`https://cdn.simpleicons.org/${slug}`} alt={slug} className="h-7 w-7" />
+              <img
+                src={LOGOS[tool.slug]}
+                alt={tool.label}
+                loading="lazy"
+                className="h-7 w-7 object-contain"
+              />
             </div>
           ))}
         </div>
+
         <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent" />
         <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent" />
       </div>
@@ -351,12 +431,16 @@ function Steps() {
     <section id="how" className="py-24">
       <div className="mx-auto max-w-6xl px-6">
         <Reveal>
-          <h2 className="display max-w-2xl text-4xl sm:text-5xl">Watch one decision get made.</h2>
+          <h2 className="display max-w-2xl text-4xl sm:text-5xl">
+            Watch one decision get made.
+          </h2>
+
           <p className="mt-5 max-w-2xl text-muted-foreground">
-            Connect your accounts and every signal converges on one agent — this is what it does
-            before it hands anything back to you.
+            Connect your accounts and every signal converges on one agent —
+            this is what it does before it hands anything back to you.
           </p>
         </Reveal>
+
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {STEPS.map((s, i) => (
             <Reveal key={s.n} delay={i * 0.08}>
@@ -367,8 +451,12 @@ function Steps() {
                     {s.kicker}
                   </span>
                 </div>
+
                 <h3 className="display mt-6 text-2xl">{s.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{s.body}</p>
+
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {s.body}
+                </p>
               </article>
             </Reveal>
           ))}
@@ -377,14 +465,17 @@ function Steps() {
         <Reveal delay={0.1}>
           <div className="surface-dark relative mt-8 overflow-hidden rounded-[28px] p-8">
             <div className="hex-grid absolute inset-0 opacity-60" />
+
             <div className="relative grid gap-8 md:grid-cols-[1fr_1.1fr]">
               <div>
                 <p className="text-xs uppercase tracking-[0.18em] text-cream/50">
                   Inside the agent
                 </p>
+
                 <p className="display mt-4 text-3xl text-cream">
                   run 8f2c · 3.6s wall clock · 6 sources cited
                 </p>
+
                 <div className="mt-6 space-y-2 text-sm text-cream/70">
                   {[
                     ["0.4s", "Read 6 prior threads with Sarah Chen"],
@@ -393,32 +484,44 @@ function Steps() {
                     ["3.6s", "Drafted the reply in your voice — held for approval"],
                   ].map(([t, l]) => (
                     <div key={t} className="flex gap-4">
-                      <span className="w-10 shrink-0 text-cream/40">{t}</span>
+                      <span className="w-10 shrink-0 text-cream/40">
+                        {t}
+                      </span>
                       <span>{l}</span>
                     </div>
                   ))}
                 </div>
               </div>
+
               <div className="rounded-3xl border border-white/10 bg-white/8 p-6 backdrop-blur-xl">
                 <div className="flex items-center justify-between">
-                  <p className="font-medium text-cream">Sarah Chen's renewal</p>
+                  <p className="font-medium text-cream">
+                    Sarah Chen's renewal
+                  </p>
+
                   <span className="rounded-full bg-brand px-2.5 py-1 text-[11px] font-semibold text-white">
                     Needs you
                   </span>
                 </div>
+
                 <p className="mt-3 text-sm leading-relaxed text-cream/70">
-                  Contract lapses in 6 days and the auto-renew clause needs five days' notice. Reply
-                  drafted in your voice.
+                  Contract lapses in 6 days and the auto-renew clause needs
+                  five days' notice. Reply drafted in your voice.
                 </p>
+
                 <div className="mt-6 flex gap-2">
                   <span className="rounded-full bg-cream px-4 py-2 text-sm font-medium text-ink">
                     Approve
                   </span>
+
                   <span className="rounded-full border border-white/20 px-4 py-2 text-sm text-cream">
                     Edit
                   </span>
                 </div>
-                <p className="mt-4 text-xs text-cream/45">Nothing sends until you approve it.</p>
+
+                <p className="mt-4 text-xs text-cream/45">
+                  Nothing sends until you approve it.
+                </p>
               </div>
             </div>
           </div>
@@ -459,21 +562,30 @@ function Memory() {
           <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
             Memory that knows the work
           </p>
+
           <h2 className="display mt-4 max-w-2xl text-4xl sm:text-5xl">
             It remembers what you were already working on.
           </h2>
+
           <p className="mt-5 max-w-2xl text-muted-foreground">
-            Kloyya turns your browsing and messaging history into memory, so you never repeat
-            context. Nothing here is shared across accounts — it stays scoped to you.
+            Kloyya turns your browsing and messaging history into memory, so
+            you never repeat context. Nothing here is shared across accounts
+            — it stays scoped to you.
           </p>
         </Reveal>
+
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           {MEMORY.map((m, i) => (
             <Reveal key={m.n} delay={i * 0.08}>
               <article className="card-soft h-full p-7">
                 <span className="display text-3xl text-brand">{m.n}</span>
+
                 <h3 className="mt-5 text-lg font-medium">{m.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{m.body}</p>
+
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {m.body}
+                </p>
+
                 <p className="mt-5 border-t border-border pt-4 text-sm text-foreground/70">
                   {m.foot}
                 </p>
@@ -532,21 +644,31 @@ function Ledger() {
           <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
             Built to be measured
           </p>
+
           <h2 className="display mt-4 max-w-2xl text-4xl sm:text-5xl">
             Measured before it's marketed.
           </h2>
+
           <p className="mt-5 max-w-2xl text-muted-foreground">
-            We are not going to publish a score we cannot show you the working for. Here is exactly
-            what gets measured, and exactly where the build is today.
+            We are not going to publish a score we cannot show you the working
+            for. Here is exactly what gets measured, and exactly where the
+            build is today.
           </p>
         </Reveal>
+
         <div className="mt-12 grid gap-6 md:grid-cols-3">
           {METRICS.map((m, i) => (
             <Reveal key={m.title} delay={i * 0.07}>
               <div className="card-soft h-full p-6">
-                <span className="text-[11px] uppercase tracking-[0.14em] text-brand">{m.tag}</span>
+                <span className="text-[11px] uppercase tracking-[0.14em] text-brand">
+                  {m.tag}
+                </span>
+
                 <h3 className="mt-4 text-lg font-medium">{m.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{m.body}</p>
+
+                <p className="mt-2 text-sm text-muted-foreground">
+                  {m.body}
+                </p>
               </div>
             </Reveal>
           ))}
@@ -556,24 +678,32 @@ function Ledger() {
           <div className="mt-10 rounded-[28px] border border-border bg-card p-8">
             <div className="flex flex-wrap items-baseline justify-between gap-2">
               <h3 className="display text-2xl">Development ledger</h3>
-              <span className="text-xs text-muted-foreground">updated as the build moves</span>
+
+              <span className="text-xs text-muted-foreground">
+                updated as the build moves
+              </span>
             </div>
+
             <div className="mt-6 divide-y divide-border">
               {LEDGER.map((l) => (
                 <div key={l.title} className="flex flex-wrap gap-4 py-4">
                   <span className="w-32 shrink-0 text-xs uppercase tracking-[0.12em] text-muted-foreground">
                     {l.tag}
                   </span>
+
                   <div>
                     <p className="font-medium">{l.title}</p>
-                    <p className="text-sm text-muted-foreground">{l.body}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {l.body}
+                    </p>
                   </div>
                 </div>
               ))}
             </div>
+
             <p className="mt-4 text-sm text-muted-foreground">
-              When the eval set is big enough to mean something, the numbers and the methodology
-              publish together.
+              When the eval set is big enough to mean something, the numbers
+              and the methodology publish together.
             </p>
           </div>
         </Reveal>
@@ -619,15 +749,24 @@ function Faq() {
           <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
             Security & questions
           </p>
-          <h2 className="display mt-4 text-4xl sm:text-5xl">The parts worth spelling out.</h2>
+
+          <h2 className="display mt-4 text-4xl sm:text-5xl">
+            The parts worth spelling out.
+          </h2>
         </Reveal>
+
         <Reveal delay={0.08}>
           <Accordion type="single" collapsible className="w-full">
             {FAQ.map((f, i) => (
-              <AccordionItem key={f.q} value={`i${i}`} className="border-border">
+              <AccordionItem
+                key={f.q}
+                value={`i${i}`}
+                className="border-border"
+              >
                 <AccordionTrigger className="text-left text-base font-medium hover:no-underline">
                   {f.q}
                 </AccordionTrigger>
+
                 <AccordionContent className="text-sm leading-relaxed text-muted-foreground">
                   {f.a}
                 </AccordionContent>
@@ -646,14 +785,18 @@ function Closing() {
   return (
     <section className="surface-dark relative overflow-hidden py-28">
       <div className="hex-grid absolute inset-0 opacity-60" />
+
       <div className="relative mx-auto max-w-3xl px-6 text-center">
         <Reveal>
           <h2 className="display text-4xl text-cream sm:text-6xl">
             Built for the work you actually have to do.
           </h2>
+
           <p className="mt-5 text-cream/70">
-            Join the waitlist and get a private beta key when your cohort opens.
+            Join the waitlist and get a private beta key when your cohort
+            opens.
           </p>
+
           <div className="mt-9 flex flex-wrap justify-center gap-3">
             <a
               href={LOGIN_URL}
@@ -661,6 +804,7 @@ function Closing() {
             >
               Enter Kloyya
             </a>
+
             <a
               href={LOGIN_URL}
               className="rounded-full border border-white/20 px-6 py-3 text-sm font-medium text-cream transition-colors hover:bg-white/10"
@@ -668,6 +812,7 @@ function Closing() {
               Login
             </a>
           </div>
+
           <p className="mt-5 text-xs uppercase tracking-[0.16em] text-cream/40">
             Secure Waitlist Priority
           </p>
@@ -677,31 +822,66 @@ function Closing() {
   );
 }
 
+/* ---------------------------------- footer --------------------------------- */
+
 function Footer() {
   return (
     <footer className="bg-ink py-14 text-cream">
       <div className="mx-auto grid max-w-6xl gap-10 px-6 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
         <div>
           <div className="flex items-center gap-2">
-            <img src={logo.url} alt="Kloyya" className="h-6 w-6" />
+            <img
+              src="/kloyya-logo.png"
+              alt="Kloyya"
+              className="h-6 w-6 object-contain"
+            />
+
             <span className="display text-lg">kloyya</span>
           </div>
+
           <p className="mt-4 max-w-xs text-sm text-cream/60">
-            The intelligence layer behind executive decisions. An autonomous AI Chief of Staff, in
-            active build.
+            The intelligence layer behind executive decisions. An autonomous
+            AI Chief of Staff, in active build.
           </p>
         </div>
+
         {[
-          { t: "Product", l: [["Product Core", "#product"], ["How it works", "#how"], ["Login", LOGIN_URL]] },
-          { t: "Company", l: [["Build ledger", "#ledger"], ["FAQ", "#faq"]] },
-          { t: "Legal", l: [["Privacy", "#"], ["Terms", "#"], ["Trust & Security", "#faq"]] },
+          {
+            t: "Product",
+            l: [
+              ["Product Core", "#product"],
+              ["How it works", "#how"],
+              ["Login", LOGIN_URL],
+            ],
+          },
+          {
+            t: "Company",
+            l: [
+              ["Build ledger", "#ledger"],
+              ["FAQ", "#faq"],
+            ],
+          },
+          {
+            t: "Legal",
+            l: [
+              ["Privacy", "#"],
+              ["Terms", "#"],
+              ["Trust & Security", "#faq"],
+            ],
+          },
         ].map((col) => (
           <div key={col.t}>
-            <p className="text-xs uppercase tracking-[0.16em] text-cream/40">{col.t}</p>
+            <p className="text-xs uppercase tracking-[0.16em] text-cream/40">
+              {col.t}
+            </p>
+
             <ul className="mt-4 space-y-2 text-sm">
               {col.l.map(([label, href]) => (
                 <li key={label}>
-                  <a href={href} className="text-cream/70 transition-colors hover:text-cream">
+                  <a
+                    href={href}
+                    className="text-cream/70 transition-colors hover:text-cream"
+                  >
                     {label}
                   </a>
                 </li>
@@ -710,9 +890,15 @@ function Footer() {
           </div>
         ))}
       </div>
+
       <div className="mx-auto mt-12 flex max-w-6xl flex-wrap items-center justify-between gap-3 border-t border-white/10 px-6 pt-6 text-xs text-cream/45">
-        <span>© 2026 Kloyya. Built for reliability, not for a launch graph.</span>
-        <span>Stop managing notifications. Start executing strategy.</span>
+        <span>
+          © 2026 Kloyya. Built for reliability, not for a launch graph.
+        </span>
+
+        <span>
+          Stop managing notifications. Start executing strategy.
+        </span>
       </div>
     </footer>
   );
