@@ -79,7 +79,7 @@
   --destructive: oklch(0.577 0.245 27.325);
   --destructive-foreground: oklch(0.985 0 0);
 
-  --border: oklch(0.89 0.011 75);
+  --border: oklch(89% .011 75);
   --input: oklch(0.89 0.011 75);
   --ring: var(--brand);
 
