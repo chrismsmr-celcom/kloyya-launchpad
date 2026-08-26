@@ -30,7 +30,6 @@ const LOGOS: Record<string, string> = {
   hubspot: "/integrations/hubspot.svg",
   googlecalendar: "/integrations/google_calendar.svg",
   googlesheets: "/integrations/google_sheets.svg",
-  outlook: "/integrations/outlook.svg",
   pipedrive: "/integrations/pipedrive.svg",
   zohocrm: "/integrations/zoho_crm.svg",
   clickup: "/integrations/clickup.svg",
@@ -374,6 +373,27 @@ const TOOLS = [
   { slug: "facebook", label: "Facebook" },
 ];
 
+function IntegrationSet() {
+  return (
+    <>
+      {TOOLS.map((tool, i) => (
+        <div
+          key={`${tool.slug}-${i}`}
+          className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-border bg-card shadow-[var(--shadow-soft)]"
+          title={tool.label}
+        >
+          <img
+            src={LOGOS[tool.slug]}
+            alt={tool.label}
+            loading="lazy"
+            className="h-7 w-7 object-contain"
+          />
+        </div>
+      ))}
+    </>
+  );
+}
+
 function Integrations() {
   return (
     <section id="product" className="border-b border-border py-20">
@@ -394,26 +414,22 @@ function Integrations() {
         </Reveal>
       </div>
 
-      <div className="relative mt-12 overflow-hidden">
-        <div className="marquee-track gap-4">
-          {[...TOOLS, ...TOOLS].map((tool, i) => (
-            <div
-              key={`${tool.slug}-${i}`}
-              className="flex h-16 w-16 items-center justify-center rounded-2xl border border-border bg-card shadow-[var(--shadow-soft)]"
-              title={tool.label}
-            >
-              <img
-                src={LOGOS[tool.slug]}
-                alt={tool.label}
-                loading="lazy"
-                className="h-7 w-7 object-contain"
-              />
-            </div>
-          ))}
+      <div className="relative mt-12 w-full overflow-hidden">
+        <div className="marquee-track flex w-max gap-4">
+          <div className="flex shrink-0 gap-4">
+            <IntegrationSet />
+          </div>
+
+          <div
+            className="flex shrink-0 gap-4"
+            aria-hidden="true"
+          >
+            <IntegrationSet />
+          </div>
         </div>
 
-        <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-background to-transparent" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-background to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-background to-transparent sm:w-28" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-background to-transparent sm:w-28" />
       </div>
     </section>
   );
@@ -614,6 +630,236 @@ function Memory() {
   );
 }
 
+/* ----------------------------------- team ---------------------------------- */
+
+const TEAM = [
+  {
+    name: "Christopher Dikesa Ahundu",
+    role: "Co-Founder & CTO",
+    image: "/team/chris.png",
+    bio: "Leading Kloyya's technology, architecture, and engineering direction.",
+    linkedin: "",
+    github: "",
+    featured: true,
+  },
+  {
+    name: "Whelman Nkunda",
+    role: "Co-Founder & CEO",
+    image: "/team/whelman.png",
+    bio: "Building Kloyya's vision, strategy, product direction, and growth.",
+    linkedin: "",
+    github: "",
+    featured: true,
+  },
+  {
+    name: "Ram Kumar",
+    role: "Frontend & Payment Tool Management",
+    image: "/team/ram-kumar.png",
+    bio: "Crafting the frontend experience and managing payment tooling.",
+    linkedin: "",
+    github: "",
+    featured: false,
+  },
+];
+
+function TeamPhoto({
+  image,
+  name,
+}: {
+  image: string;
+  name: string;
+}) {
+  const [failed, setFailed] = useState(false);
+
+  const initials = name
+    .split(" ")
+    .map((part) => part[0])
+    .slice(0, 2)
+    .join("");
+
+  return (
+    <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+      {!failed ? (
+        <img
+          src={image}
+          alt={name}
+          loading="lazy"
+          onError={() => setFailed(true)}
+          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]"
+        />
+      ) : null}
+
+      {failed ? (
+        <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-ink via-ink/95 to-brand/50">
+          <div className="flex h-24 w-24 items-center justify-center rounded-full border border-white/10 bg-white/5 text-2xl font-medium text-cream/70 backdrop-blur-xl">
+            {initials}
+          </div>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
+function Team() {
+  return (
+    <section id="team" className="border-t border-border py-24">
+      <div className="mx-auto max-w-6xl px-6">
+        <Reveal>
+          <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+            The people behind Kloyya
+          </p>
+
+          <h2 className="display mt-4 max-w-3xl text-4xl sm:text-5xl">
+            Built by people who care about the work behind the work.
+          </h2>
+
+          <p className="mt-5 max-w-2xl text-muted-foreground">
+            A focused team building the intelligence layer behind modern
+            work — from the technology underneath it to the experience you
+            actually use.
+          </p>
+        </Reveal>
+
+        <div className="mt-14">
+          <Reveal>
+            <div className="mb-6 flex items-center gap-3">
+              <span className="h-px w-8 bg-border" />
+
+              <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                Founding team
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid gap-6 md:grid-cols-2">
+            {TEAM.filter((member) => member.featured).map((member, index) => (
+              <Reveal key={member.name} delay={index * 0.08}>
+                <article className="group overflow-hidden rounded-[28px] border border-border bg-card shadow-[var(--shadow-soft)] transition-all duration-500 hover:-translate-y-1 hover:shadow-[var(--shadow-card)]">
+                  <TeamPhoto image={member.image} name={member.name} />
+
+                  <div className="p-6 sm:p-7">
+                    <p className="text-xs uppercase tracking-[0.14em] text-brand">
+                      {member.role}
+                    </p>
+
+                    <h3 className="display mt-2 text-2xl sm:text-3xl">
+                      {member.name}
+                    </h3>
+
+                    <p className="mt-4 max-w-lg text-sm leading-relaxed text-muted-foreground">
+                      {member.bio}
+                    </p>
+
+                    <div className="mt-6 flex items-center gap-2">
+                      {member.linkedin ? (
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="rounded-full border border-border px-4 py-2 text-xs font-medium transition-colors hover:bg-muted"
+                        >
+                          LinkedIn
+                        </a>
+                      ) : (
+                        <span className="rounded-full border border-border px-4 py-2 text-xs font-medium text-muted-foreground/40">
+                          LinkedIn
+                        </span>
+                      )}
+
+                      {member.github ? (
+                        <a
+                          href={member.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="rounded-full border border-border px-4 py-2 text-xs font-medium transition-colors hover:bg-muted"
+                        >
+                          GitHub
+                        </a>
+                      ) : (
+                        <span className="rounded-full border border-border px-4 py-2 text-xs font-medium text-muted-foreground/40">
+                          GitHub
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+
+        <div className="mt-16">
+          <Reveal>
+            <div className="mb-6 flex items-center gap-3">
+              <span className="h-px w-8 bg-border" />
+
+              <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                The team
+              </p>
+            </div>
+          </Reveal>
+
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {TEAM.filter((member) => !member.featured).map((member, index) => (
+              <Reveal key={member.name} delay={index * 0.06}>
+                <article className="group overflow-hidden rounded-[24px] border border-border bg-card shadow-[var(--shadow-soft)] transition-all duration-500 hover:-translate-y-1">
+                  <TeamPhoto image={member.image} name={member.name} />
+
+                  <div className="p-5">
+                    <p className="text-[11px] uppercase tracking-[0.14em] text-brand">
+                      {member.role}
+                    </p>
+
+                    <h3 className="mt-2 text-xl font-medium">
+                      {member.name}
+                    </h3>
+
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {member.bio}
+                    </p>
+
+                    <div className="mt-5 flex items-center gap-2">
+                      {member.linkedin ? (
+                        <a
+                          href={member.linkedin}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="rounded-full border border-border px-3 py-1.5 text-xs transition-colors hover:bg-muted"
+                        >
+                          LinkedIn
+                        </a>
+                      ) : (
+                        <span className="rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground/40">
+                          LinkedIn
+                        </span>
+                      )}
+
+                      {member.github ? (
+                        <a
+                          href={member.github}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="rounded-full border border-border px-3 py-1.5 text-xs transition-colors hover:bg-muted"
+                        >
+                          GitHub
+                        </a>
+                      ) : (
+                        <span className="rounded-full border border-border px-3 py-1.5 text-xs text-muted-foreground/40">
+                          GitHub
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* --------------------------------- ledger --------------------------------- */
 
 const METRICS = [
@@ -709,6 +955,7 @@ function Ledger() {
 
                   <div>
                     <p className="font-medium">{l.title}</p>
+
                     <p className="text-sm text-muted-foreground">
                       {l.body}
                     </p>
@@ -867,6 +1114,7 @@ function Footer() {
             l: [
               ["Product Core", "#product"],
               ["How it works", "#how"],
+              ["Team", "#team"],
               ["Login", LOGIN_URL],
             ],
           },
@@ -928,6 +1176,7 @@ export default function Landing() {
       <Integrations />
       <Steps />
       <Memory />
+      <Team />
       <Ledger />
       <Faq />
       <Closing />
