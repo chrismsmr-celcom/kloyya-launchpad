@@ -25,6 +25,22 @@ const LOGOS: Record<string, string> = {
   excel: "/integrations/excel.svg",
   whatsapp: "/integrations/WhatsApp.svg",
   notion: "/integrations/Notion.svg",
+  stripe: "/integrations/stripe.svg",
+  team: "/integrations/team.svg",
+  hubspot: "/integrations/hubspot.svg",
+  googlecalendar: "/integrations/google_calendar.svg",
+  googlesheets: "/integrations/google_sheets.svg",
+  outlook: "/integrations/outlook.svg",
+  pipedrive: "/integrations/pipedrive.svg",
+  zohocrm: "/integrations/zoho_crm.svg",
+  clickup: "/integrations/clickup.svg",
+  meta: "/integrations/meta.svg",
+  youtube: "/integrations/youtube.svg",
+  mailchimp: "/integrations/mailchimp.svg",
+  supabase: "/integrations/supabase.svg",
+  googletask: "/integrations/google_task.svg",
+  linear: "/integrations/linear.svg",
+  shopify: "/integrations/shopify.svg",
 };
 
 /* ---------------------------------- bits --------------------------------- */
