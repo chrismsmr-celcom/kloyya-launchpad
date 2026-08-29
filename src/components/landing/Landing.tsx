@@ -634,19 +634,19 @@ function Memory() {
 
 const TEAM = [
   {
-    name: "Christopher Dikesa Ahundu",
-    role: "Co-Founder & CTO",
-    image: "/team/chris.png",
-    bio: "Leading Kloyya's technology, architecture, and engineering direction.",
+    name: "Whelman kunda",
+    role: "Co-Founder & CEO",
+    image: "/team/whelman.png",
+    bio: "Building Kloyya's vision, strategy, product direction, and growth.",
     linkedin: "",
     github: "",
     featured: true,
   },
-  {
-    name: "Whelman Nkunda",
-    role: "Co-Founder & CEO",
-    image: "/team/whelman.png",
-    bio: "Building Kloyya's vision, strategy, product direction, and growth.",
+   {
+    name: "Christopher Dikesa Ahundu",
+    role: "Co-Founder & CTO",
+    image: "/team/chris.png",
+    bio: "Leading Kloyya's technology, architecture, and engineering direction.",
     linkedin: "",
     github: "",
     featured: true,
