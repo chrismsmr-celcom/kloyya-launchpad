@@ -173,18 +173,19 @@
 
 @media (prefers-reduced-motion: reduce) {
   .marquee-track {
-    animation-play-state: paused;
-  }
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+  will-change: transform;
 }
 
-@keyframes float-slow {
-  0%,
-  100% {
-    transform: translateY(0);
+@keyframes marquee {
+  from {
+    transform: translateX(0);
   }
 
-  50% {
-    transform: translateY(-10px);
+  to {
+    transform: translateX(-50%);
   }
 }
 
