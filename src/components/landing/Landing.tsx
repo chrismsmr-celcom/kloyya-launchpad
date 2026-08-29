@@ -150,6 +150,7 @@ const NAV = [
   { label: "Product Core", href: "#product" },
   { label: "How it works", href: "#how" },
   { label: "Build ledger", href: "#ledger" },
+  { label: "Pricing", href: "#pricing" },
   { label: "Security & FAQ", href: "#faq" },
 ];
 
@@ -415,18 +416,22 @@ function Integrations() {
       </div>
 
       <div className="relative mt-12 w-full overflow-hidden">
-        <div className="marquee-track flex w-max gap-4">
-          <div className="flex shrink-0 gap-4">
-            <IntegrationSet />
-          </div>
+  <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-background to-transparent" />
+  <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-background to-transparent" />
 
-          <div
-            className="flex shrink-0 gap-4"
-            aria-hidden="true"
-          >
-            <IntegrationSet />
-          </div>
-        </div>
+  <div className="marquee-track flex w-max">
+    <div className="flex shrink-0 gap-4 pr-4">
+      <IntegrationSet />
+    </div>
+
+    <div
+      className="flex shrink-0 gap-4 pr-4"
+      aria-hidden="true"
+    >
+      <IntegrationSet />
+    </div>
+  </div>
+</div>
 
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-background to-transparent sm:w-28" />
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-background to-transparent sm:w-28" />
@@ -974,7 +979,253 @@ function Ledger() {
     </section>
   );
 }
+/* -------------------------------- pricing -------------------------------- */
 
+const PRICING_PLANS = [
+  {
+    name: "Starter",
+    description: "For individuals and small businesses getting started.",
+    monthly: 99,
+    yearly: 948,
+    users: "Up to 5 users",
+    workspace: "1 workspace",
+    features: [
+      "Basic workflows",
+      "AI recommendations",
+      "1,000 AI actions / month",
+      "Email support",
+    ],
+  },
+  {
+    name: "Team",
+    description: "For teams that want Kloyya coordinating their work.",
+    monthly: 299,
+    yearly: 2868,
+    users: "Up to 25 users",
+    workspace: "Up to 3 workspaces",
+    popular: true,
+    features: [
+      "Advanced workflows",
+      "AI agents",
+      "5,000 AI actions / month",
+      "Priority support",
+    ],
+  },
+  {
+    name: "Business",
+    description: "For growing companies with multiple teams or locations.",
+    monthly: 799,
+    yearly: 7668,
+    users: "Up to 50 users",
+    workspace: "Up to 10 locations",
+    features: [
+      "Cross-team workflows",
+      "Operational intelligence",
+      "15,000 AI actions / month",
+      "Priority onboarding & support",
+    ],
+  },
+  {
+    name: "Enterprise",
+    description: "For large organizations with complex operations.",
+    monthly: null,
+    yearly: null,
+    users: "Unlimited users",
+    workspace: "Unlimited locations",
+    features: [
+      "Advanced AI agents",
+      "Custom integrations",
+      "Custom AI actions",
+      "Dedicated support & SLA",
+    ],
+  },
+];
+
+function Pricing() {
+  const [yearly, setYearly] = useState(false);
+
+  return (
+    <section id="pricing" className="border-b border-border py-24">
+      <div className="mx-auto max-w-6xl px-6">
+        <Reveal>
+          <div className="flex flex-col justify-between gap-8 md:flex-row md:items-end">
+            <div>
+              <p className="text-xs uppercase tracking-[0.18em] text-muted-foreground">
+                Pricing
+              </p>
+
+              <h2 className="display mt-4 max-w-3xl text-4xl sm:text-5xl lg:text-6xl">
+                One brain.
+                <br />
+                One clear <span className="italic text-brand">decision</span>.
+              </h2>
+
+              <p className="mt-5 max-w-xl text-muted-foreground">
+                Start small. Give Kloyya more responsibility as your team
+                grows.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3 self-start rounded-full border border-border bg-white px-2 py-2 shadow-[var(--shadow-soft)] md:self-auto">
+              <button
+                type="button"
+                onClick={() => setYearly(false)}
+                className={`rounded-full px-4 py-2 text-sm transition-colors ${
+                  !yearly
+                    ? "bg-ink text-cream"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Monthly
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setYearly(true)}
+                className={`rounded-full px-4 py-2 text-sm transition-colors ${
+                  yearly
+                    ? "bg-ink text-cream"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                Yearly
+              </button>
+
+              <span className="mr-2 rounded-full bg-brand/10 px-2.5 py-1 text-[11px] font-medium text-brand">
+                Save 20%
+              </span>
+            </div>
+          </div>
+        </Reveal>
+
+        <div className="mt-12 grid gap-4 lg:grid-cols-4">
+          {PRICING_PLANS.map((plan, index) => {
+            const price = yearly ? plan.yearly : plan.monthly;
+
+            return (
+              <Reveal key={plan.name} delay={index * 0.06}>
+                <article
+                  className={`relative flex h-full flex-col rounded-[28px] border p-6 transition-all duration-300 hover:-translate-y-1 ${
+                    plan.popular
+                      ? "border-brand bg-ink text-cream shadow-[0_24px_70px_-30px_rgba(50,100,255,0.45)]"
+                      : "border-border bg-card text-foreground shadow-[var(--shadow-soft)]"
+                  }`}
+                >
+                  {plan.popular && (
+                    <div className="absolute -top-3 left-6 rounded-full bg-brand px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.14em] text-white">
+                      Most popular
+                    </div>
+                  )}
+
+                  <div>
+                    <p
+                      className={`text-xs uppercase tracking-[0.16em] ${
+                        plan.popular
+                          ? "text-cream/50"
+                          : "text-muted-foreground"
+                      }`}
+                    >
+                      {plan.name}
+                    </p>
+
+                    <p
+                      className={`mt-4 min-h-[48px] text-sm leading-relaxed ${
+                        plan.popular
+                          ? "text-cream/65"
+                          : "text-muted-foreground"
+                      }`}
+                    >
+                      {plan.description}
+                    </p>
+                  </div>
+
+                  <div className="mt-7">
+                    {price === null ? (
+                      <div className="display text-4xl">Custom</div>
+                    ) : (
+                      <div className="flex items-end gap-1">
+                        <span className="display text-5xl">
+                          ${price.toLocaleString()}
+                        </span>
+                        <span
+                          className={`mb-1 text-sm ${
+                            plan.popular
+                              ? "text-cream/50"
+                              : "text-muted-foreground"
+                          }`}
+                        >
+                          /{yearly ? "year" : "month"}
+                        </span>
+                      </div>
+                    )}
+
+                    {yearly && price !== null && (
+                      <p
+                        className={`mt-2 text-xs ${
+                          plan.popular
+                            ? "text-brand-soft"
+                            : "text-brand"
+                        }`}
+                      >
+                        Billed yearly
+                      </p>
+                    )}
+                  </div>
+
+                  <div
+                    className={`my-7 h-px ${
+                      plan.popular ? "bg-white/10" : "bg-border"
+                    }`}
+                  />
+
+                  <ul className="space-y-3 text-sm">
+                    <li className="flex gap-3">
+                      <span className="text-brand">✓</span>
+                      <span>{plan.users}</span>
+                    </li>
+
+                    <li className="flex gap-3">
+                      <span className="text-brand">✓</span>
+                      <span>{plan.workspace}</span>
+                    </li>
+
+                    {plan.features.map((feature) => (
+                      <li key={feature} className="flex gap-3">
+                        <span className="text-brand">✓</span>
+                        <span
+                          className={
+                            plan.popular ? "text-cream/80" : ""
+                          }
+                        >
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="mt-auto pt-8">
+                    <a
+                      href={LOGIN_URL}
+                      className={`block rounded-full px-5 py-3 text-center text-sm font-medium transition-transform hover:scale-[1.02] ${
+                        plan.popular
+                          ? "bg-cream text-ink"
+                          : "bg-ink text-cream"
+                      }`}
+                    >
+                      {plan.name === "Enterprise"
+                        ? "Talk to sales"
+                        : "Start with Kloyya"}
+                    </a>
+                  </div>
+                </article>
+              </Reveal>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
 /* ----------------------------------- faq ---------------------------------- */
 
 const FAQ = [
