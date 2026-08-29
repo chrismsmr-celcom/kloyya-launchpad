@@ -374,27 +374,6 @@ const TOOLS = [
   { slug: "facebook", label: "Facebook" },
 ];
 
-function IntegrationSet() {
-  return (
-    <>
-      {TOOLS.map((tool, i) => (
-        <div
-          key={`${tool.slug}-${i}`}
-          className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-border bg-card shadow-[var(--shadow-soft)]"
-          title={tool.label}
-        >
-          <img
-            src={LOGOS[tool.slug]}
-            alt={tool.label}
-            loading="lazy"
-            className="h-7 w-7 object-contain"
-          />
-        </div>
-      ))}
-    </>
-  );
-}
-
 function Integrations() {
   return (
     <section id="product" className="border-b border-border py-20">
@@ -415,26 +394,29 @@ function Integrations() {
         </Reveal>
       </div>
 
+      {/* Infinite integrations marquee */}
       <div className="relative mt-12 w-full overflow-hidden">
-  <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-background to-transparent" />
-  <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-background to-transparent" />
-
-  <div className="marquee-track flex w-max">
-    <div className="flex shrink-0 gap-4 pr-4">
-      <IntegrationSet />
-    </div>
-
-    <div
-      className="flex shrink-0 gap-4 pr-4"
-      aria-hidden="true"
-    >
-      <IntegrationSet />
-    </div>
-  </div>
-</div>
-
+        {/* Left fade */}
         <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20 bg-gradient-to-r from-background to-transparent sm:w-28" />
+
+        {/* Right fade */}
         <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20 bg-gradient-to-l from-background to-transparent sm:w-28" />
+
+        {/* Infinite track */}
+        <div className="marquee-track flex w-max">
+          {/* First set */}
+          <div className="flex shrink-0 gap-4 pr-4">
+            <IntegrationSet />
+          </div>
+
+          {/* Duplicate set for seamless infinite loop */}
+          <div
+            className="flex shrink-0 gap-4 pr-4"
+            aria-hidden="true"
+          >
+            <IntegrationSet />
+          </div>
+        </div>
       </div>
     </section>
   );
