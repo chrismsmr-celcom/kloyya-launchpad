@@ -373,7 +373,26 @@ const TOOLS = [
   { slug: "instagram", label: "Instagram" },
   { slug: "facebook", label: "Facebook" },
 ];
-
+function IntegrationSet() {
+  return (
+    <>
+      {TOOLS.map((tool, i) => (
+        <div
+          key={`${tool.slug}-${i}`}
+          className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl border border-border bg-card shadow-[var(--shadow-soft)]"
+          title={tool.label}
+        >
+          <img
+            src={LOGOS[tool.slug]}
+            alt={tool.label}
+            loading="lazy"
+            className="h-7 w-7 object-contain"
+          />
+        </div>
+      ))}
+    </>
+  );
+}
 function Integrations() {
   return (
     <section id="product" className="border-b border-border py-20">
