@@ -1430,6 +1430,7 @@ export default function Landing() {
       <Memory />
       <Team />
       <Ledger />
+      <Pricing />
       <Faq />
       <Closing />
       <Footer />
